@@ -20,11 +20,36 @@
 				float: left;
 				height: 200px;
 			}
+			.hh {
+				height: 80px;
+				background: #222222;
+			}
+			.outer {
+				height: 200px;
+			}
+			.item {
+				float: left;
+				width: 210px; height: 136px; margin: 20px;	/*margin 边距*/
+				border: 5px solid #FFA500;	/*solid 边框*/
+			}
+			#box {
+				width: 900px;
+				overflow: auto;
+				margin: auto;
+			}
 		</style>
 	</head>
 	<body>
-		<div class="a"></div>
-		<div class="b"></div>
-		<div class="c"></div>
+		<div class="outer">
+			<div class="a"></div>
+			<div class="b"></div>
+			<div class="c"></div>
+		</div>
+		<div class="hh"></div>
+		<div id="box">
+			<div class="item" style="background:#0f0;"></div>
+			<div class="item" style="background:#f00;"></div>
+			<div class="item" style="background:#00f;"></div>
+		</div>
 	</body>
 </html>
