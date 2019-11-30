@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据查询</title>
+		<script src="js/echarts.js"></script>
+		<style type="text/css">
+			#title h1 {
+				display:inline;
+			}
+			#title input {
+				float:right;
+				height: 42px;
+			}
+			.choose {
+				float: left;
+				width: 180px; height: 136px;
+			}
+			.result {
+				float: left;
+				width:600px; height:400px
+			}
+			#check, box02 {
+				/* width: 900px; */
+				overflow: auto;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="title">
+			<h1>欢迎使用！</h1>
+			<input type="button" value="退出登录">
+		</div>
+		<hr >
+		<div id="reset">
+			<input type="button" value="数据刷新">
+		</div>
+		<hr>
+		<div id="check">
+			<div class="choose">
+				选择年份：
+				<br>
+				<select id="s1" name="select_year">
+					<option value="2009">2009</option>
+					<option value="2010">2010</option>
+					<option value="2011">2011</option>
+					<option value="2012">2012</option>
+					<option value="2013">2013</option>
+					<option value="2014">2014</option>
+					<option value="2015">2015</option>
+					<option value="2016">2016</option>
+					<option value="2017">2017</option>
+					<option value="2018">2018</option>
+					<option value="2019">2019</option>
+				</select>
+			</div>
+			<div class="choose">
+				平均：<input type="text" placeholder="平均价格(元/㎡)" name="avg" readonly="readonly" class="form-control" value="{{avg_price}}">
+				<br/>
+				最高：<input type="text" placeholder="最高价格(元/㎡)" name="max" readonly="readonly" class="form-control" value="{{max_price}}">
+				<br/>
+				最低：<input type="text" placeholder="最低价格(元/㎡)" name="min" readonly="readonly" class="form-control" value="{{min_price}}">
+				<br/>
+			</div>
+		</div>
+		<div id="chart">
+			<div id="box01">
+				<div class="choose">
+					选择小区：
+					<br>
+					<select id="s2" name="select_estate">
+						<option>A区</option>
+						<option>B区</option>
+						<option>C区</option>
+						<option>D区</option>
+						<option>E区</option>
+						<option>F区</option>
+						<option>G区</option>
+						<option>H区</option>
+						<option>I区</option>
+						<option>J区</option>
+						<option>K区</option>
+					</select>
+					<br>
+					您所选小区：<input type="text" placeholder="上次选择小区" name="l_estate" readonly="readonly" class="form-control" value="{{select_estate}}">
+					<br/>
+					选择户型(面积不同㎡)：
+					<br>
+					<select id="s3" name="select_area">
+						<option value="80" >80</option>
+						<option value="100" >100</option>
+						<option value="120" >120</option>
+					</select>
+					<br>
+					您所选户型：<input type="text" placeholder="上次选择户型" name="l_area" readonly="readonly" class="form-control" value="{{select_area}}">
+					<br/>
+				</div>
+				<div id="chart01" class="result"></div>
+			</div>
+			<div id="box02">
+				<div class="choose">
+					选择年份：
+					<br>
+					<select id="s4" name="select_year">
+						<option value="2009">2009</option>
+						<option value="2010">2010</option>
+						<option value="2011">2011</option>
+						<option value="2012">2012</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+					</select>
+					<br>
+					选择小区：
+					<br>
+					<select id="s5" name="select_estate">
+						<option>A区</option>
+						<option>B区</option>
+						<option>C区</option>
+						<option>D区</option>
+						<option>E区</option>
+						<option>F区</option>
+						<option>G区</option>
+						<option>H区</option>
+						<option>I区</option>
+						<option>J区</option>
+						<option>K区</option>
+					</select>
+				</div>
+				<div id="chart02" class="result"></div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var dom = document.getElementById("chart01");
+			var myChart = echarts.init(dom);
+			var app = {};
+			option = null;
+			option = {
+				title: {
+					text: '折线图'
+				},
+				xAxis: {
+					type: 'category',
+					data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+				},
+				yAxis: {
+					type: 'value'
+				},
+				series: [{
+					data: [820, 932, 901, 934, 1290, 1330, 1320],
+					type: 'line'
+				}]
+			};
+			;
+			if (option && typeof option === "object") {
+				myChart.setOption(option, true);
+			}
+		</script>
+		<script type="text/jscript">
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('chart02'));
+			// 指定图表的配置项和数据
+			var option = {
+				title: {
+					text: '柱状图'
+				},
+				tooltip: {},
+				legend: {
+					data:['销量']
+				},
+				xAxis: {
+					data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+				},
+				yAxis: {},
+				series: [{
+					name: '销量',
+					type: 'bar',
+					data: [5, 20, 36, 10, 10, 20]
+				}]
+			};
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		</script>
+	</body>
+</html>
